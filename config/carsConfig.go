@@ -2,6 +2,7 @@ package config
 
 import (
 	"embed"
+	"github.com/SZabrodskii/microservices/libs/utils"
 )
 
 //go:embed files
@@ -18,15 +19,15 @@ type CarsParams struct {
 	OwnerSurname string `json:"owner_surname"`
 }
 
-func GetCarsParamsFromEnv() CarsParams {
-	return GetCarsParams{
-		Page:         GetEnvInt("PAGE", 1),
-		PageSize:     GetEnvInt("PAGE_SIZE", 10),
-		RegNum:       GetEnv("REG_NUM", ""),
-		Mark:         GetEnv("MARK", ""),
-		Model:        GetEnv("MODEL", ""),
-		Year:         GetEnvInt("YEAR", 0),
-		OwnerName:    GetEnv("OWNER_NAME", ""),
-		OwnerSurname: GetEnv("OWNER_SURNAME", ""),
+func GetCarsParams() CarsParams {
+	return CarsParams{
+		Page:         utils.GetEnv("PAGE", 1),
+		PageSize:     utils.GetEnv("PAGE_SIZE", 10),
+		RegNum:       utils.GetEnv("REG_NUM", ""),
+		Mark:         utils.GetEnv("MARK", ""),
+		Model:        utils.GetEnv("MODEL", ""),
+		Year:         utils.GetEnv("YEAR", 0),
+		OwnerName:    utils.GetEnv("OWNER_NAME", ""),
+		OwnerSurname: utils.GetEnv("OWNER_SURNAME", ""),
 	}
 }

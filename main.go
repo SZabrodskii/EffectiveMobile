@@ -4,6 +4,8 @@ import (
 	"EffectiveMobile/models"
 	"github.com/SZabrodskii/microservices/libs/providers"
 	"github.com/SZabrodskii/microservices/libs/providers/config"
+	"github.com/SZabrodskii/microservices/libs/utils"
+	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"log"
 )
@@ -17,11 +19,11 @@ func main() {
 	defer logger.Sync()
 
 	cfg := &config.PostgreSQLParams{
-		Host:     GetEnv("DB_HOST", "localhost"),
-		Port:     GetEnv("DB_PORT", 5432),
-		Username: GetEnv("DB_USERNAME", ""),
-		Password: GetEnv("DB_PASSWORD", ""),
-		Database: GetEnv("DB_NAME", ""),
+		Host:     utils.GetEnv("DB_HOST", "localhost"),
+		Port:     utils.GetEnv("DB_PORT", 5432),
+		Username: utils.GetEnv("DB_USERNAME", ""),
+		Password: utils.GetEnv("DB_PASSWORD", ""),
+		Database: utils.GetEnv("DB_NAME", ""),
 		TLS:      nil,
 	}
 	postgreSQLProvider, err := providers.NewPostgreSQLProvider(cfg, logger)
@@ -42,5 +44,5 @@ func main() {
 
 	router := gin.Default()
 	r.SetupRoutes(router)
-	router.Run(":8080")
+	router.Run(":5432")
 }
