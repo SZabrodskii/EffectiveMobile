@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  your_service_name:
+    image: your_image_name
+    container_name: postgreSQL-container
+    ports:
+      - "5432:5432"
+    environment:
+      - ENV_VARIABLES
+    volumes:
+      - volume_paths
+    depends_on:
+      - dependencies
